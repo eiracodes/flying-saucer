@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Flying Saucer — Sky Bar & Lounge, Jhansi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet"/>
+
+<style>
+/* ════════════════════════════════════════════════════
+   GLOBAL TOKENS — Elementor-ready CSS Variables
+   ════════════════════════════════════════════════════ */
+:root {
+  /* Core palette — warm neon amber + crimson + teal */
+  --e-global-color-primary:       #ff9900;
+  --e-global-color-primary-dim:   #c87000;
+  --e-global-color-secondary:     #e63946;
+  --e-global-color-accent:        #00d4c8;
+  --e-global-color-gold:          #ffd166;
+
+  --e-global-color-bg-pitch:      #080808;
+  --e-global-color-bg-dark:       #0f0f0f;
+  --e-global-color-bg-card:       #141414;
+  --e-global-color-bg-card2:      #1a1a1a;
+
+  --e-global-color-text:          #f5f0e8;
+  --e-global-color-text-muted:    #888880;
+  --e-global-color-border:        rgba(255,153,0,0.12);
+  --e-global-color-border-b:      rgba(255,153,0,0.35);
+
+  --font-display:  'Bebas Neue', sans-serif;
+  --font-body:     'DM Sans', sans-serif;
+
+  --max-w:         1360px;
+  --py:            6.5rem;
+  --r:             1rem;
+  --r-sm:          0.5rem;
+
+  --glow-amber: 0 0 28px rgba(255,153,0,.5),  0 0 80px rgba(255,153,0,.15);
+  --glow-red:   0 0 28px rgba(230,57,70,.5),   0 0 80px rgba(230,57,70,.15);
+  --glow-teal:  0 0 28px rgba(0,212,200,.45),  0 0 80px rgba(0,212,200,.12);
+  --t:          all .3s cubic-bezier(.4,0,.2,1);
+  --ts:         all .6s cubic-bezier(.4,0,.2,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-body);
+  background:var(--e-global-color-bg-pitch);
+  color:var(--e-global-color-text);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--e-global-color-bg-pitch);}
+::-webkit-scrollbar-thumb{background:var(--e-global-color-primary);border-radius:4px;}
+
+/* grain */
+body::after{
+  content:'';position:fixed;inset:0;
+  pointer-events:none;z-index:999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity:.55;
+}
+
+/* layout */
+.wrap{max-width:var(--max-w);margin-inline:auto;padding-inline:clamp(1.2rem,4vw,3rem);position:relative;z-index:1;}
+.sec{padding-block:var(--py);position:relative;}
+
+/* ════════ NAV ════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:1.5rem 0;transition:var(--ts);}
+.nav.stuck{
+  background:rgba(8,8,8,.95);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--e-global-color-border);
+  padding:.9rem 0;
+  box-shadow:0 4px 40px rgba(0,0,0,.6);
+}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+.nav__logo{font-family:var(--font-display);font-size:1.6rem;letter-spacing:.04em;line-height:1;}
+.nav__logo .sub{
+  display:block;font-family:var(--font-body);
+  font-size:.57rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--e-global-color-primary);margin-top:2px;
+}
+.nav__links{display:flex;align-items:center;gap:2.2rem;}
+.nav__links a{
+  font-size:.77rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--e-global-color-text-muted);transition:var(--t);position:relative;
+}
+.nav__links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;
+  background:var(--e-global-color-primary);transition:var(--t);
+}
+.nav__links a:hover{color:var(--e-global-color-text);}
+.nav__links a:hover::after{width:100%;}
+.nav__cta{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.52rem 1.25rem;border:1.5px solid var(--e-global-color-primary);
+  border-radius:3px;font-size:.72rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--e-global-color-primary);transition:var(--t);
+}
+.nav__cta:hover{background:var(--e-global-color-primary);color:#080808;box-shadow:var(--glow-amber);}
+.nav__burger{display:none;flex-direction:column;gap:5px;padding:4px;}
+.nav__burger span{display:block;width:22px;height:1.5px;background:var(--e-global-color-text);border-radius:4px;transition:var(--t);}
+.nav__mob{
+  display:none;flex-direction:column;
+  position:absolute;top:100%;left:0;right:0;
+  background:rgba(8,8,8,.98);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--e-global-color-border);
+  max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;
+}
+.nav__mob.open{max-height:360px;padding-block:1.2rem;}
+.nav__mob a{
+  display:block;padding:.85rem 2rem;font-size:.84rem;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--e-global-color-text-muted);
+  border-bottom:1px solid rgba(255,153,0,.06);transition:var(--t);
+}
+.nav__mob a:hover{color:var(--e-global-color-primary);padding-left:2.6rem;}
+
+/* ════════ HERO ════════ */
+.hero{position:relative;min-height:100dvh;display:grid;place-items:center;overflow:hidden;}
+.hero__bg{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1920&q=90&auto=format&fit=crop');
+  background-size:cover;background-position:center;
+  will-change:transform;
+}
+.hero__film{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(175deg,rgba(8,8,8,.78) 0%,rgba(25,8,0,.55) 45%,rgba(8,8,8,.9) 100%),
+    radial-gradient(ellipse 70% 60% at 38% 55%,rgba(255,110,0,.2) 0%,transparent 70%);
+}
+.hero__lines{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.05) 2px,rgba(0,0,0,.05) 4px);
+  pointer-events:none;
+}
+.hero__content{
+  position:relative;z-index:2;
+  text-align:center;padding:2rem;max-width:920px;
+}
+.hero__pill{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.34rem 1.1rem;
+  border:1px solid rgba(255,153,0,.4);border-radius:3px;
+  font-size:.63rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--e-global-color-primary);
+  background:rgba(255,153,0,.06);
+  margin-bottom:1.8rem;
+  animation:riseUp .65s ease .1s both;
+}
+.hero__pill::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--e-global-color-primary);
+  box-shadow:0 0 8px var(--e-global-color-primary);
+  animation:blink 1.8s ease-in-out infinite;
+}
+.hero__h1{
+  font-family:var(--font-display);
+  font-size:clamp(4rem,11vw,10rem);
+  line-height:.9;letter-spacing:.025em;
+  margin-bottom:1.6rem;
+  animation:riseUp .65s ease .28s both;
+}
+.hero__h1 .line1{display:block;color:var(--e-global-color-text);}
+.hero__h1 .line2{
+  display:block;color:var(--e-global-color-primary);
+  text-shadow:0 0 35px rgba(255,153,0,.55),0 0 90px rgba(255,153,0,.2);
+}
+.hero__h1 .line3{
+  display:block;
+  -webkit-text-stroke:2px var(--e-global-color-primary);
+  color:transparent;
+}
+.hero__sub{
+  font-size:clamp(.92rem,1.8vw,1.12rem);font-weight:300;font-style:italic;
+  color:rgba(245,240,232,.6);line-height:1.65;
+  max-width:480px;margin-inline:auto;margin-bottom:2.8rem;
+  animation:riseUp .65s ease .44s both;
+}
+.hero__ctas{
+  display:flex;align-items:center;justify-content:center;
+  gap:.85rem;flex-wrap:wrap;
+  animation:riseUp .65s ease .58s both;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+  padding:.82rem 1.85rem;font-weight:700;font-size:.8rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  border-radius:3px;transition:var(--t);
+}
+.btn-a{background:var(--e-global-color-primary);color:#080808;}
+.btn-a:hover{background:#ffb733;box-shadow:var(--glow-amber);transform:translateY(-2px);}
+.btn-g{
+  border:1.5px solid rgba(245,240,232,.22);color:var(--e-global-color-text);
+  background:rgba(255,255,255,.04);backdrop-filter:blur(8px);
+}
+.btn-g:hover{border-color:var(--e-global-color-accent);color:var(--e-global-color-accent);box-shadow:var(--glow-teal);transform:translateY(-2px);}
+
+/* stats bar */
+.hero__stats{
+  position:absolute;bottom:0;left:0;right:0;z-index:3;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  animation:riseUp .65s ease .8s both;
+}
+.hstat{
+  padding:1.35rem 1.5rem;
+  display:flex;flex-direction:column;align-items:center;gap:.28rem;
+  background:rgba(8,8,8,.72);backdrop-filter:blur(16px);
+  border-right:1px solid rgba(255,153,0,.1);
+  border-top:1px solid rgba(255,153,0,.12);
+  transition:var(--t);
+}
+.hstat:last-child{border-right:none;}
+.hstat:hover{background:rgba(255,153,0,.06);}
+.hstat__n{font-family:var(--font-display);font-size:2.3rem;letter-spacing:.04em;color:var(--e-global-color-primary);line-height:1;}
+.hstat__l{font-size:.6rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--e-global-color-text-muted);}
+
+/* ════════ TICKER ════════ */
+.ticker{overflow:hidden;white-space:nowrap;background:var(--e-global-color-primary);padding:.52rem 0;}
+.ticker__track{display:inline-flex;gap:3rem;animation:tickerRun 22s linear infinite;}
+.ticker__item{
+  font-family:var(--font-display);font-size:1rem;letter-spacing:.07em;color:#080808;
+  display:inline-flex;align-items:center;gap:.7rem;white-space:nowrap;
+}
+.ticker__item .dot{width:5px;height:5px;border-radius:50%;background:#080808;opacity:.4;}
+
+/* ════════ SECTION HELPERS ════════ */
+.sec-label{
+  display:inline-flex;align-items:center;gap:.8rem;
+  font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--e-global-color-primary);margin-bottom:.85rem;
+}
+.sec-label::before{content:'';display:block;width:28px;height:1.5px;background:var(--e-global-color-primary);}
+.sec-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.8rem,5.5vw,5.2rem);
+  line-height:.93;letter-spacing:.02em;max-width:640px;
+}
+.sec-title .hi{color:var(--e-global-color-primary);}
+.sec-head{margin-bottom:3.5rem;}
+
+/* ════════ STORY / BENTO ════════ */
+.story-sec{background:var(--e-global-color-bg-dark);}
+
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:1rem;}
+.bc{
+  border-radius:var(--r);border:1px solid rgba(255,153,0,.1);
+  overflow:hidden;position:relative;transition:var(--t);
+}
+.bc:hover{border-color:rgba(255,153,0,.38);transform:translateY(-3px);}
+
+.bc--main{
+  grid-column:1/8;grid-row:1/3;min-height:460px;
+  background-image:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=900&q=88&auto=format&fit=crop');
+  background-size:cover;background-position:center;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:2.4rem;
+}
+.bc--main::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(5deg,rgba(8,8,8,.97) 0%,rgba(8,8,8,.5) 45%,rgba(70,18,0,.18) 100%);
+}
+.bc--main .bci{position:relative;z-index:1;}
+.anni{
+  font-family:var(--font-display);font-size:clamp(5rem,10vw,9rem);
+  line-height:.85;letter-spacing:.03em;color:var(--e-global-color-primary);
+  text-shadow:0 0 60px rgba(255,153,0,.4);
+}
+.bc--main h3{font-family:var(--font-display);font-size:1.9rem;letter-spacing:.03em;line-height:1.05;margin-bottom:.5rem;}
+.bc--main p{font-size:.84rem;color:var(--e-global-color-text-muted);line-height:1.65;max-width:340px;}
+
+.bc--roof{
+  grid-column:8/13;grid-row:1/2;min-height:220px;
+  background-image:url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=700&q=88&auto=format&fit=crop');
+  background-size:cover;background-position:center;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;
+}
+.bc--roof::before{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,8,8,.9) 0%,transparent 55%);}
+.bc--roof .bci{position:relative;z-index:1;}
+
+.bc--drinks{
+  grid-column:8/11;grid-row:2/3;
+  background:linear-gradient(135deg,rgba(255,100,0,.1),rgba(255,153,0,.03));
+  padding:1.8rem;display:flex;flex-direction:column;justify-content:space-between;
+}
+.bc--beats{
+  grid-column:11/13;grid-row:2/3;
+  background:linear-gradient(135deg,rgba(0,212,200,.08),rgba(0,212,200,.02));
+  padding:1.6rem;display:flex;flex-direction:column;justify-content:space-between;
+}
+
+.bc h4{font-family:var(--font-display);font-size:1.28rem;letter-spacing:.03em;margin-bottom:.4rem;}
+.bc p{font-size:.8rem;color:var(--e-global-color-text-muted);line-height:1.6;}
+.bc-ico{font-size:2rem;margin-bottom:.8rem;}
+.bc-stat{font-family:var(--font-display);font-size:2.8rem;letter-spacing:.04em;color:var(--e-global-color-primary);line-height:1;margin-top:1rem;}
+.bc-stat.t{color:var(--e-global-color-accent);}
+.chip{
+  display:inline-flex;align-items:center;gap:.35rem;
+  font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:.28rem .68rem;border-radius:3px;
+  background:rgba(255,153,0,.1);color:var(--e-global-color-primary);
+  border:1px solid rgba(255,153,0,.2);margin-bottom:.9rem;
+}
+.chip.t{background:rgba(0,212,200,.08);color:var(--e-global-color-accent);border-color:rgba(0,212,200,.2);}
+
+/* ════════ MENU ════════ */
+.menu-sec{background:var(--e-global-color-bg-pitch);}
+.tabs{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin-bottom:2.8rem;}
+.tab{
+  padding:.52rem 1.25rem;border-radius:3px;
+  font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--e-global-color-text-muted);border:1px solid rgba(255,153,0,.14);
+  background:transparent;transition:var(--t);
+}
+.tab:hover{color:var(--e-global-color-text);border-color:rgba(255,153,0,.4);}
+.tab.on{background:var(--e-global-color-primary);color:#080808;border-color:transparent;box-shadow:var(--glow-amber);}
+
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem;}
+.mc{
+  background:var(--e-global-color-bg-card);
+  border:1px solid rgba(255,153,0,.1);border-radius:var(--r);
+  overflow:hidden;transition:var(--t);display:none;
+}
+.mc.show{display:block;animation:cardPop .38s cubic-bezier(.4,0,.2,1) both;}
+.mc:hover{border-color:rgba(255,153,0,.4);transform:translateY(-5px);box-shadow:0 18px 50px rgba(0,0,0,.55),var(--glow-amber);}
+.mc__img{height:195px;background-size:cover;background-position:center;position:relative;overflow:hidden;}
+.mc__img::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,8,8,.75) 0%,transparent 55%);}
+.mc:hover .mc__img{transform:scale(1.04);transition:transform .55s ease;}
+.mc__badge{
+  position:absolute;top:.72rem;left:.72rem;
+  padding:.2rem .62rem;border-radius:3px;
+  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;z-index:2;
+}
+.b-hot{background:#ff4500;color:#fff;}
+.b-new{background:var(--e-global-color-accent);color:#080808;}
+.b-pop{background:var(--e-global-color-primary);color:#080808;}
+.b-sp {background:var(--e-global-color-secondary);color:#fff;}
+.mc__body{padding:1.2rem 1.3rem 1.3rem;}
+.mc__name{font-family:var(--font-display);font-size:1.15rem;letter-spacing:.03em;margin-bottom:.35rem;}
+.mc__desc{font-size:.77rem;color:var(--e-global-color-text-muted);line-height:1.55;margin-bottom:1rem;}
+.mc__foot{display:flex;align-items:center;justify-content:space-between;}
+.mc__price{font-family:var(--font-display);font-size:1.2rem;letter-spacing:.04em;color:var(--e-global-color-primary);}
+.mc__add{
+  padding:.36rem .84rem;border-radius:3px;
+  border:1px solid rgba(255,153,0,.28);font-size:.67rem;font-weight:700;
+  letter-spacing:.1em;color:var(--e-global-color-primary);transition:var(--t);
+}
+.mc__add:hover{background:var(--e-global-color-primary);color:#080808;border-color:transparent;}
+
+/* ════════ GALLERY ════════ */
+.gallery-sec{background:var(--e-global-color-bg-dark);padding-block:4.5rem;}
+.gallery-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:2rem;gap:1rem;flex-wrap:wrap;
+}
+.gallery-ig{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--e-global-color-primary);
+  border-bottom:1px solid rgba(255,153,0,.35);padding-bottom:.2rem;transition:var(--t);
+}
+.gallery-ig:hover{color:#ffb733;}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:.75rem;height:340px;
+}
+.gi{border-radius:var(--r-sm);overflow:hidden;position:relative;cursor:pointer;}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease;}
+.gi:hover img{transform:scale(1.07);}
+.gi::after{
+  content:'📸';position:absolute;inset:0;
+  display:grid;place-items:center;font-size:1.4rem;
+  background:rgba(255,153,0,.15);opacity:0;transition:var(--t);backdrop-filter:blur(2px);
+}
+.gi:hover::after{opacity:1;}
+.gi:nth-child(2){margin-top:-24px;}
+.gi:nth-child(3){margin-top:18px;}
+.gi:nth-child(4){margin-top:-16px;}
+.gi:nth-child(5){margin-top:12px;}
+
+/* ════════ RESERVATIONS ════════ */
+.res-sec{background:var(--e-global-color-bg-pitch);}
+.res-wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:2.5rem;align-items:start;}
+.form-box{
+  background:var(--e-global-color-bg-card);
+  border:1px solid rgba(255,153,0,.15);border-radius:var(--r);padding:2.6rem;
+}
+.form-box h3{font-family:var(--font-display);font-size:2.3rem;letter-spacing:.04em;margin-bottom:.35rem;}
+.form-box .fsub{font-size:.8rem;color:var(--e-global-color-text-muted);margin-bottom:2rem;line-height:1.6;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.fg{margin-bottom:1.1rem;}
+.fg label{
+  display:block;font-size:.6rem;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--e-global-color-text-muted);margin-bottom:.45rem;
+}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:.78rem 1rem;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,153,0,.15);border-radius:var(--r-sm);
+  color:var(--e-global-color-text);font-family:var(--font-body);font-size:.84rem;
+  outline:none;transition:var(--t);-webkit-appearance:none;
+}
+.fg select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888880' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;
+  background-size:15px;padding-right:2.4rem;
+  background-color:rgba(255,255,255,.035);
+}
+.fg select option{background:var(--e-global-color-bg-card);color:var(--e-global-color-text);}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:var(--e-global-color-primary);
+  box-shadow:0 0 0 3px rgba(255,153,0,.1),var(--glow-amber);
+  background:rgba(255,153,0,.035);
+}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(136,136,128,.38);}
+.fg textarea{resize:vertical;min-height:90px;}
+.fg.full{grid-column:1/-1;}
+.btn-book{
+  width:100%;padding:.92rem;margin-top:.4rem;border-radius:3px;
+  background:var(--e-global-color-primary);color:#080808;
+  font-family:var(--font-display);font-size:1.18rem;letter-spacing:.08em;
+  transition:var(--t);
+}
+.btn-book:hover{background:#ffb733;box-shadow:var(--glow-amber);transform:translateY(-2px);}
+#form-ok{
+  display:none;text-align:center;padding:1rem;margin-top:.8rem;
+  border-radius:var(--r-sm);
+  background:rgba(255,153,0,.08);border:1px solid rgba(255,153,0,.25);
+  color:var(--e-global-color-primary);font-size:.82rem;font-weight:500;
+}
+
+/* events */
+.ev-col{display:flex;flex-direction:column;gap:1.1rem;}
+.ev-col .ch{margin-bottom:.5rem;}
+.ev-col .ch h3{font-family:var(--font-display);font-size:2rem;letter-spacing:.04em;margin-bottom:.4rem;}
+.ev-col .ch p{font-size:.8rem;color:var(--e-global-color-text-muted);line-height:1.6;}
+.ecard{
+  background:var(--e-global-color-bg-card);border:1px solid rgba(255,153,0,.1);
+  border-radius:var(--r);padding:1.35rem;
+  display:flex;align-items:flex-start;gap:1.1rem;
+  transition:var(--t);position:relative;overflow:hidden;
+}
+.ecard::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(to bottom,var(--e-global-color-primary),var(--e-global-color-secondary));
+}
+.ecard:hover{border-color:rgba(255,153,0,.4);transform:translateX(4px);box-shadow:var(--glow-amber);}
+.ecard.tl::before{background:linear-gradient(to bottom,var(--e-global-color-accent),var(--e-global-color-primary));}
+.ecard.tl:hover{box-shadow:var(--glow-teal);}
+.eday{text-align:center;min-width:48px;}
+.eday .dn{display:block;font-size:.57rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e-global-color-primary);margin-bottom:1px;}
+.eday .dd{display:block;font-family:var(--font-display);font-size:1.9rem;letter-spacing:.04em;color:var(--e-global-color-text);line-height:1;}
+.ecard.tl .dn{color:var(--e-global-color-accent);}
+.ediv{width:1px;align-self:stretch;background:rgba(255,153,0,.1);}
+.einfo h4{font-family:var(--font-display);font-size:.98rem;letter-spacing:.04em;margin-bottom:.3rem;}
+.einfo p{font-size:.75rem;color:var(--e-global-color-text-muted);line-height:1.55;margin-bottom:.6rem;}
+.etags{display:flex;gap:.35rem;flex-wrap:wrap;}
+.etag{
+  padding:.18rem .52rem;border-radius:3px;
+  font-size:.57rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(255,153,0,.1);color:var(--e-global-color-primary);border:1px solid rgba(255,153,0,.18);
+}
+.etag.t{background:rgba(0,212,200,.08);color:var(--e-global-color-accent);border-color:rgba(0,212,200,.18);}
+
+/* ════════ CALL BAR ════════ */
+.callbar{background:var(--e-global-color-primary);padding:1.35rem 0;}
+.callbar__in{display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+.callbar__txt{font-family:var(--font-display);font-size:1.35rem;letter-spacing:.06em;color:#080808;}
+.callbar__nums{display:flex;align-items:center;gap:1.3rem;flex-wrap:wrap;}
+.callbar__num{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--font-display);font-size:1.3rem;letter-spacing:.05em;color:#080808;
+  padding:.38rem .9rem;border-radius:3px;background:rgba(0,0,0,.12);transition:var(--t);
+}
+.callbar__num:hover{background:rgba(0,0,0,.22);}
+
+/* ════════ FOOTER ════════ */
+.footer{background:var(--e-global-color-bg-dark);border-top:1px solid rgba(255,153,0,.1);padding-top:4.5rem;}
+.footer-top{
+  display:grid;grid-template-columns:1.8fr 1fr 1fr 1.3fr;gap:3rem;
+  padding-bottom:3.5rem;border-bottom:1px solid rgba(255,153,0,.08);
+}
+.fb__name{font-family:var(--font-display);font-size:1.85rem;letter-spacing:.04em;margin-bottom:.2rem;}
+.fb__sub{font-size:.57rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--e-global-color-primary);margin-bottom:1rem;}
+.fb p{font-size:.8rem;color:var(--e-global-color-text-muted);line-height:1.7;margin-bottom:1.4rem;max-width:268px;}
+.socials{display:flex;gap:.65rem;}
+.socbtn{
+  width:36px;height:36px;border-radius:4px;
+  border:1px solid rgba(255,153,0,.2);
+  display:grid;place-items:center;
+  font-size:.72rem;font-weight:700;color:var(--e-global-color-text-muted);transition:var(--t);
+}
+.socbtn:hover{border-color:var(--e-global-color-primary);color:var(--e-global-color-primary);box-shadow:var(--glow-amber);transform:translateY(-3px);}
+.fcol h5{font-family:var(--font-display);font-size:.95rem;letter-spacing:.1em;margin-bottom:1.3rem;}
+.fcol ul{display:flex;flex-direction:column;gap:.68rem;}
+.fcol ul li a{font-size:.79rem;color:var(--e-global-color-text-muted);transition:var(--t);}
+.fcol ul li a:hover{color:var(--e-global-color-primary);padding-left:4px;}
+.hrs{display:flex;flex-direction:column;gap:.52rem;}
+.hr-row{display:flex;justify-content:space-between;font-size:.77rem;}
+.hr-day{color:var(--e-global-color-text-muted);}
+.hr-time{color:var(--e-global-color-primary);font-weight:600;}
+.loc{margin-top:1.3rem;}
+.loc__lbl{display:block;font-size:.58rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--e-global-color-primary);margin-bottom:.35rem;}
+.loc p{font-size:.75rem;color:var(--e-global-color-text-muted);line-height:1.6;}
+
+.footer-bot{
+  padding-block:.75rem 1.1rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+}
+.footer-bot p,.footer-bot a{font-size:.7rem;color:var(--e-global-color-text-muted);}
+.footer-bot a{color:var(--e-global-color-primary);}
+.footer-bot a:hover{text-decoration:underline;}
+
+/* ════════ SCROLL REVEAL ════════ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .62s ease,transform .62s ease;}
+.rv.up{opacity:1;transform:translateY(0);}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+
+/* ════════ KEYFRAMES ════════ */
+@keyframes riseUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.75);}}
+@keyframes cardPop{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes tickerRun{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ════════ RESPONSIVE ════════ */
+@media(max-width:1024px){
+  :root{--py:4.5rem;}
+  .nav__links,.nav__cta{display:none;}
+  .nav__burger{display:flex;}
+  .bento{grid-template-columns:repeat(6,1fr);}
+  .bc--main{grid-column:1/7;grid-row:1;min-height:310px;}
+  .bc--roof{grid-column:1/4;grid-row:2;min-height:200px;}
+  .bc--drinks{grid-column:4/7;grid-row:2;}
+  .bc--beats{grid-column:1/4;grid-row:3;}
+  .res-wrap{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;gap:2rem;}
+  .fb{grid-column:1/-1;}
+  .gallery-grid{grid-template-columns:repeat(3,1fr);height:240px;}
+  .gi:nth-child(4),.gi:nth-child(5){display:none;}
+  .gi:nth-child(2),.gi:nth-child(3){margin-top:0;}
+  .hero__stats{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:640px){
+  :root{--py:3.2rem;}
+  .hero__h1{font-size:clamp(3.2rem,15vw,5rem);}
+  .bento{grid-template-columns:1fr;}
+  .bc--main,.bc--roof,.bc--drinks,.bc--beats{grid-column:1;grid-row:auto;}
+  .bc--main{min-height:300px;}
+  .mgrid{grid-template-columns:1fr;}
+  .frow{grid-template-columns:1fr;}
+  .form-box{padding:1.5rem;}
+  .footer-top{grid-template-columns:1fr;gap:1.8rem;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);height:190px;}
+  .gi:nth-child(3){display:none;}
+  .gi:nth-child(2){margin-top:0;}
+  .hero__stats{grid-template-columns:1fr;}
+  .hstat{padding:1rem 1.5rem;}
+  .callbar__in{flex-direction:column;gap:1rem;text-align:center;}
+  .callbar__nums{justify-content:center;}
+  .footer-bot{flex-direction:column;text-align:center;}
+  .footer-top{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════
+     NAV
+═══════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">
+        The Flying Saucer
+        <span class="sub">Sky Bar &amp; Lounge · Jhansi</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#events" class="nav__cta">📞 Reserve Now</a>
+      <button class="nav__burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mob" id="mobnav">
+      <a href="#story" class="ml">Our Story</a>
+      <a href="#menu" class="ml">Menu</a>
+      <a href="#events" class="ml">Events</a>
+      <a href="#contact" class="ml">Contact</a>
+      <a href="tel:+918960716660" class="ml" style="color:var(--e-global-color-primary);font-weight:700;">📞 +91 89607 16660</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero__bg" id="pgbg"></div>
+  <div class="hero__film"></div>
+  <div class="hero__lines"></div>
+
+  <div class="hero__content">
+    <div class="hero__pill">🍻 Jhansi's Coolest New Locale</div>
+    <h1 class="hero__h1">
+      <span class="line1">THE</span>
+      <span class="line2">FLYING</span>
+      <span class="line3">SAUCER</span>
+    </h1>
+    <p class="hero__sub">
+      Redefining the sky bar &amp; lounge experience — one electric night at a time.
+    </p>
+    <div class="hero__ctas">
+      <a href="#menu" class="btn btn-a">🍸 Explore Menu</a>
+      <a href="#events" class="btn btn-g">📋 Reserve a Table</a>
+    </div>
+  </div>
+
+  <div class="hero__stats">
+    <div class="hstat"><span class="hstat__n">2+</span><span class="hstat__l">Years Running</span></div>
+    <div class="hstat"><span class="hstat__n">3K+</span><span class="hstat__l">IG Followers</span></div>
+    <div class="hstat"><span class="hstat__n">152+</span><span class="hstat__l">Moments Posted</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     TICKER
+═══════════════════════════════════ -->
+<div class="ticker">
+  <div class="ticker__track">
+    <span class="ticker__item"><span class="dot"></span>Sky Bar &amp; Lounge</span>
+    <span class="ticker__item"><span class="dot"></span>Signature Cocktails</span>
+    <span class="ticker__item"><span class="dot"></span>Rooftop Vibes</span>
+    <span class="ticker__item"><span class="dot"></span>DJ Nights Every Weekend</span>
+    <span class="ticker__item"><span class="dot"></span>Fusion Platters</span>
+    <span class="ticker__item"><span class="dot"></span>Artisanal Dimsums</span>
+    <span class="ticker__item"><span class="dot"></span>Jhansi's Coolest Spot</span>
+    <span class="ticker__item"><span class="dot"></span>Sky Bar &amp; Lounge</span>
+    <span class="ticker__item"><span class="dot"></span>Signature Cocktails</span>
+    <span class="ticker__item"><span class="dot"></span>Rooftop Vibes</span>
+    <span class="ticker__item"><span class="dot"></span>DJ Nights Every Weekend</span>
+    <span class="ticker__item"><span class="dot"></span>Fusion Platters</span>
+    <span class="ticker__item"><span class="dot"></span>Artisanal Dimsums</span>
+    <span class="ticker__item"><span class="dot"></span>Jhansi's Coolest Spot</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     OUR STORY
+═══════════════════════════════════ -->
+<section class="story-sec sec" id="story">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-label">Est. · Officer Colony, Jhansi</div>
+      <h2 class="sec-title">Two Years of<br><span class="hi">Epic</span> Nights</h2>
+    </div>
+    <div class="bento">
+      <div class="bc bc--main rv">
+        <div class="bci">
+          <div class="anni">02</div>
+          <h3>Years of Sky-High<br>Experiences</h3>
+          <p>From our very first pour to tonight's last toast — Jhansi's coolest new locale keeps redefining what a night out should feel like. Indoor, semi-outdoor &amp; open rooftop. Every seat's a vibe.</p>
+        </div>
+      </div>
+      <div class="bc bc--roof rv d1">
+        <div class="bci">
+          <div class="chip">★ Highly Rated</div>
+          <h4>The Rooftop</h4>
+          <p>Three settings. Indoor · Semi-Outdoor · Open Air. Infinite memories.</p>
+        </div>
+      </div>
+      <div class="bc bc--drinks rv d2">
+        <div>
+          <div class="bc-ico">🍹</div>
+          <div class="chip">Hand Crafted</div>
+          <h4>Signature Drinks</h4>
+          <p>Bold mixes, local botanicals, global spirits. Every sip tells a story worth repeating.</p>
+        </div>
+        <div class="bc-stat">40+<span style="font-size:.95rem;color:var(--e-global-color-text-muted);font-family:var(--font-body);font-weight:300;"> cocktails</span></div>
+      </div>
+      <div class="bc bc--beats rv d3">
+        <div>
+          <div class="bc-ico">🎶</div>
+          <div class="chip t">Live &amp; DJ</div>
+          <h4>Beats</h4>
+          <p>Acoustic sets to high-voltage DJ nights, every weekend without fail.</p>
+        </div>
+        <div class="bc-stat t">365<span style="font-size:.95rem;color:var(--e-global-color-text-muted);font-family:var(--font-body);font-weight:300;"> nights</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     MENU
+═══════════════════════════════════ -->
+<section class="menu-sec sec" id="menu">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-label">Curated Bestsellers</div>
+      <h2 class="sec-title">What We <span class="hi">Serve</span></h2>
+    </div>
+    <div class="tabs rv">
+      <button class="tab on" data-cat="cocktails">🍸 Signature Cocktails</button>
+      <button class="tab" data-cat="platters">🍢 Tandoori &amp; Fusion</button>
+      <button class="tab" data-cat="dimsums">🥟 Artisanal Dimsums</button>
+    </div>
+    <div class="mgrid" id="mgrid">
+
+      <!-- Cocktails -->
+      <div class="mc" data-cat="cocktails">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-hot">🔥 Best Seller</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Amber Skyline</h3>
+          <p class="mc__desc">Dark rum, raw mango shrub, black salt rim, smoked chilli fire. Tropical meets rooftop.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 420</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="mc" data-cat="cocktails">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1587223962930-cb7f31384c19?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-pop">⭐ Popular</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Flying High</h3>
+          <p class="mc__desc">Premium vodka, passion fruit, blue curacao, lychee foam. Our signature layered pour.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 480</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="mc" data-cat="cocktails">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1546171753-97d7676e4602?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-new">✦ New</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Saucer Special</h3>
+          <p class="mc__desc">Gin, elderflower, butterfly pea flower, tonic water, gold shimmer finish.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 520</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+
+      <!-- Platters -->
+      <div class="mc" data-cat="platters">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-hot">🔥 Chef's Pick</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Smoked Lamb Seekh</h3>
+          <p class="mc__desc">Wood-fired seekh, truffle-infused dip, micro herbs &amp; saffron naan bites.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 680</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="mc" data-cat="platters">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-pop">⭐ Crowd Fav</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Peshwari Paneer Tikka</h3>
+          <p class="mc__desc">Malai-marinated paneer, Peshwari chutney, pomegranate reduction, crispy slaw.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 520</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="mc" data-cat="platters">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1505253758473-96b7015fcd40?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-sp">★ Fusion</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Global Platter</h3>
+          <p class="mc__desc">Korean wings, hummus, bruschetta trio, wasabi prawn skewers — the world on one board.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 850</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+
+      <!-- Dimsums -->
+      <div class="mc" data-cat="dimsums">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1563245372-f21724e3856d?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-new">✦ New Drop</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Truffle Crystal Dimsum</h3>
+          <p class="mc__desc">Translucent steamed, black truffle, king oyster mushroom, sesame &amp; aged soy glaze.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 440</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="mc" data-cat="dimsums">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-hot">🔥 Hot Pick</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Butter Chicken Dumpling</h3>
+          <p class="mc__desc">Slow-braised butter chicken filling, charred skin, makhani dipping shot on the side.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 380</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="mc" data-cat="dimsums">
+        <div class="mc__img" style="background-image:url('https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=600&q=85&auto=format&fit=crop');"><span class="mc__badge b-pop">⭐ Fan Fav</span></div>
+        <div class="mc__body">
+          <h3 class="mc__name">Prawn Har Gow</h3>
+          <p class="mc__desc">Classic Cantonese prawns elevated with Sichuan oil &amp; crispy garlic chilli crisp.</p>
+          <div class="mc__foot"><span class="mc__price">₹ 460</span><button class="mc__add">+ Add</button></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     GALLERY STRIP
+═══════════════════════════════════ -->
+<div class="gallery-sec">
+  <div class="wrap">
+    <div class="gallery-head rv">
+      <div>
+        <div class="sec-label">From Our Feed</div>
+        <h2 class="sec-title" style="font-size:clamp(2rem,4vw,3.4rem);">Caught on <span class="hi">Camera</span></h2>
+      </div>
+      <a href="https://www.instagram.com/flyingsaucerjhansi/" target="_blank" rel="noopener" class="gallery-ig">@flyingsaucerjhansi ↗</a>
+    </div>
+    <div class="gallery-grid rv d1">
+      <div class="gi"><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=500&q=80&auto=format&fit=crop" alt="Bar" loading="lazy"/></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1482275548304-a58859dc31b7?w=700&q=80&auto=format&fit=crop" alt="Rooftop Night" loading="lazy"/></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1575444758702-4a6b9222336e?w=500&q=80&auto=format&fit=crop" alt="Cocktail" loading="lazy"/></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400&q=80&auto=format&fit=crop" alt="Lounge" loading="lazy"/></div>
+      <div class="gi"><img src="https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?w=600&q=80&auto=format&fit=crop" alt="DJ Night" loading="lazy"/></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     RESERVATIONS + EVENTS
+═══════════════════════════════════ -->
+<section class="res-sec sec" id="events">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="sec-label">Book Your Table</div>
+      <h2 class="sec-title">Reserve &amp; <span class="hi">Arrive</span></h2>
+    </div>
+    <div class="res-wrap">
+
+      <div class="form-box rv">
+        <h3>Table Reservation</h3>
+        <p class="fsub">Book 24 hrs ahead for weekends. Walk-ins welcome on weekdays!</p>
+        <div class="frow">
+          <div class="fg"><label for="fn">Your Name</label><input type="text" id="fn" placeholder="Arjun Sharma"/></div>
+          <div class="fg"><label for="fp">Phone</label><input type="tel" id="fp" placeholder="+91 98765 43210"/></div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label for="fd">Date</label><input type="date" id="fd"/></div>
+          <div class="fg"><label for="ft">Time Slot</label>
+            <select id="ft">
+              <option value="">Select slot</option>
+              <option>7:00 PM – 9:00 PM</option>
+              <option>9:00 PM – 11:00 PM</option>
+              <option>11:00 PM onwards</option>
+            </select>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fg"><label for="fg2">Guests</label>
+            <select id="fg2">
+              <option value="">How many?</option>
+              <option>2 Guests</option>
+              <option>3–4 Guests</option>
+              <option>5–8 Guests</option>
+              <option>Private Event (8+)</option>
+            </select>
+          </div>
+          <div class="fg"><label for="fo">Occasion</label>
+            <select id="fo">
+              <option value="">Any occasion?</option>
+              <option>Birthday 🎂</option>
+              <option>Anniversary 💑</option>
+              <option>Date Night</option>
+              <option>Corporate Outing</option>
+              <option>Just for Vibes ✨</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg full"><label for="fno">Special Requests</label>
+          <textarea id="fno" placeholder="Any arrangements, dietary needs, or surprises we should know about..."></textarea>
+        </div>
+        <button class="btn-book" id="bookbtn">CONFIRM RESERVATION</button>
+        <div id="form-ok">🎉 Reservation received! We'll confirm on WhatsApp shortly.</div>
+      </div>
+
+      <div class="ev-col rv d2">
+        <div class="ch">
+          <h3>Upcoming <span style="color:var(--e-global-color-primary);">Events</span></h3>
+          <p>Every weekend at The Flying Saucer hits different. Here's what's live this month.</p>
+        </div>
+
+        <div class="ecard">
+          <div class="eday"><span class="dn">Fri</span><span class="dd">23</span></div>
+          <div class="ediv"></div>
+          <div class="einfo">
+            <h4>Acoustic Fridays</h4>
+            <p>Live acoustic sets by Jhansi's finest indie artists. Mellow vibes, curated playlist.</p>
+            <div class="etags"><span class="etag">Live Music</span><span class="etag">Free Entry</span><span class="etag">8 PM+</span></div>
+          </div>
+        </div>
+
+        <div class="ecard tl">
+          <div class="eday"><span class="dn" style="color:var(--e-global-color-accent);">Sat</span><span class="dd">24</span></div>
+          <div class="ediv"></div>
+          <div class="einfo">
+            <h4>Saturday Night Surge</h4>
+            <p>Top DJs from Lucknow &amp; Delhi spinning house, EDM and Bollywood remixes under open sky.</p>
+            <div class="etags"><span class="etag t">DJ Night</span><span class="etag t">Cover ₹300</span><span class="etag t">9 PM – 1 AM</span></div>
+          </div>
+        </div>
+
+        <div class="ecard">
+          <div class="eday"><span class="dn">Sun</span><span class="dd">25</span></div>
+          <div class="ediv"></div>
+          <div class="einfo">
+            <h4>Sundowner Sundays</h4>
+            <p>Rooftop sunset session — cocktail masterclass, tapas bites, ambient lounge sounds.</p>
+            <div class="etags"><span class="etag">Masterclass</span><span class="etag">6 PM – 9 PM</span></div>
+          </div>
+        </div>
+
+        <div class="ecard tl">
+          <div class="eday"><span class="dn" style="color:var(--e-global-color-accent);">Fri</span><span class="dd">30</span></div>
+          <div class="ediv"></div>
+          <div class="einfo">
+            <h4>Month-End Blowout</h4>
+            <p>Headline DJ, extended bar hours, exclusive cocktail launches. The biggest night of the month.</p>
+            <div class="etags"><span class="etag t">Headline DJ</span><span class="etag t">Limited Tables</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     CALL BAR
+═══════════════════════════════════ -->
+<div class="callbar">
+  <div class="wrap callbar__in">
+    <span class="callbar__txt">📞 FOR RESERVATIONS, CALL US:</span>
+    <div class="callbar__nums">
+      <a href="tel:+918960716660" class="callbar__num">+91 89607 16660</a>
+      <a href="tel:+918960916660" class="callbar__num">+91 89609 16660</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer class="footer" id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+
+      <div class="fb rv">
+        <div class="fb__name">The Flying Saucer</div>
+        <div class="fb__sub">Sky Bar &amp; Lounge · Jhansi</div>
+        <p>Jhansi's coolest new locale — redefining the sky bar &amp; lounge experience, one unforgettable night at a time. Indoor, semi-outdoor &amp; open rooftop seating.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/flyingsaucerjhansi/" target="_blank" rel="noopener" class="socbtn" title="Instagram">IG</a>
+          <a href="https://www.facebook.com/flyingsaucerjhansi/" target="_blank" rel="noopener" class="socbtn" title="Facebook">FB</a>
+          <a href="https://wa.me/918960716660" target="_blank" rel="noopener" class="socbtn" title="WhatsApp">WA</a>
+          <a href="https://www.zomato.com/jhansi/the-flying-saucer-sipri-bazaar" target="_blank" rel="noopener" class="socbtn" title="Zomato">ZO</a>
+        </div>
+      </div>
+
+      <div class="fcol rv d1">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#story">Our Story</a></li>
+          <li><a href="#menu">Cocktail Menu</a></li>
+          <li><a href="#menu">Food Menu</a></li>
+          <li><a href="#events">Events Calendar</a></li>
+          <li><a href="#events">Private Bookings</a></li>
+        </ul>
+      </div>
+
+      <div class="fcol rv d2">
+        <h5>Find Us</h5>
+        <ul>
+          <li><a href="https://www.zomato.com/jhansi/the-flying-saucer-sipri-bazaar" target="_blank" rel="noopener">Order on Zomato ↗</a></li>
+          <li><a href="https://www.swiggy.com/city/jhansi/the-flying-saucer-sky-bar-officer-colony-dhyanchand-stadium-rest1011536" target="_blank" rel="noopener">Order on Swiggy ↗</a></li>
+          <li><a href="https://www.instagram.com/flyingsaucerjhansi/" target="_blank" rel="noopener">Instagram ↗</a></li>
+          <li><a href="https://www.facebook.com/flyingsaucerjhansi/" target="_blank" rel="noopener">Facebook ↗</a></li>
+          <li><a href="https://maps.google.com/?q=The+Flying+Saucer+Jhansi" target="_blank" rel="noopener">Google Maps ↗</a></li>
+        </ul>
+      </div>
+
+      <div class="fcol rv d3">
+        <h5>Hours</h5>
+        <div class="hrs">
+          <div class="hr-row"><span class="hr-day">Mon – Thu</span><span class="hr-time">6 PM – 12 AM</span></div>
+          <div class="hr-row"><span class="hr-day">Friday</span><span class="hr-time">6 PM – 1 AM</span></div>
+          <div class="hr-row"><span class="hr-day">Saturday</span><span class="hr-time">5 PM – 1 AM</span></div>
+          <div class="hr-row"><span class="hr-day">Sunday</span><span class="hr-time">4 PM – 11 PM</span></div>
+        </div>
+        <div class="loc">
+          <span class="loc__lbl">📍 Location</span>
+          <p>Officer Colony, Near Dhyan Chand Stadium,<br>Sipri Bazaar, Jhansi, Uttar Pradesh</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bot">
+      <p>© 2026 The Flying Saucer Jhansi. All rights reserved.</p>
+      <p>Follow us → <a href="https://www.instagram.com/flyingsaucerjhansi/" target="_blank" rel="noopener">@flyingsaucerjhansi</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════
+     JS
+═══════════════════════════════════ -->
+<script>
+/* sticky nav */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('stuck', window.scrollY > 55), { passive: true });
+
+/* hamburger */
+const burger = document.getElementById('burger');
+const mobnav = document.getElementById('mobnav');
+document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => mobnav.classList.remove('open')));
+burger.addEventListener('click', () => { const o = mobnav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+
+/* parallax */
+const pgbg = document.getElementById('pgbg');
+window.addEventListener('scroll', () => {
+  if (window.scrollY < window.innerHeight * 1.3) pgbg.style.transform = `translateY(${window.scrollY * 0.36}px)`;
+}, { passive: true });
+
+/* menu filter */
+const tabs  = document.querySelectorAll('.tab');
+const cards = document.querySelectorAll('.mc');
+function filter(cat) {
+  cards.forEach(c => c.classList.remove('show'));
+  let d = 0;
+  cards.forEach(c => { if (c.dataset.cat === cat) { setTimeout(() => c.classList.add('show'), d); d += 55; } });
+}
+tabs.forEach(t => t.addEventListener('click', () => { tabs.forEach(b => b.classList.remove('on')); t.classList.add('on'); filter(t.dataset.cat); }));
+filter('cocktails');
+
+/* scroll reveal */
+const rvEls = document.querySelectorAll('.rv');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('up'); obs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+rvEls.forEach(el => obs.observe(el));
+
+/* reservation form */
+const bookBtn = document.getElementById('bookbtn');
+const formOk  = document.getElementById('form-ok');
+bookBtn.addEventListener('click', () => {
+  const name  = document.getElementById('fn').value.trim();
+  const phone = document.getElementById('fp').value.trim();
+  const date  = document.getElementById('fd').value;
+  if (!name || !phone || !date) {
+    bookBtn.style.background = 'var(--e-global-color-secondary)';
+    bookBtn.textContent = '⚠ Please fill Name, Phone & Date';
+    setTimeout(() => { bookBtn.style.background = ''; bookBtn.textContent = 'CONFIRM RESERVATION'; }, 3000);
+    return;
+  }
+  bookBtn.textContent = '⌛ Submitting...';
+  setTimeout(() => { bookBtn.style.display = 'none'; formOk.style.display = 'block'; }, 1100);
+});
+
+/* smooth scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (!t) return;
+    e.preventDefault();
+    window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
