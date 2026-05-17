@@ -3,7 +3,7 @@
 
 An ultra-modern, high-conversion single-page web application mockup built custom for **The Flying Saucer Jhansi**. This repository serves as a live design prototype showcasing elite UI/UX tailored to match the lounge's premium aesthetic, vibrant nightlife energy, and trending Instagram vibe.
 
-🚀 **[View Live Demo](https://YOUR-GITHUB-USERNAME.github.io/YOUR-REPO-NAME/)**
+🚀 **[View Live Demo](https://eiracodes.github.io/flying-saucer/)**
 
 ---
 
