@@ -40,4 +40,4 @@ The architecture of this live mockup is built around capturing the physical esse
 ## 🧑‍💻 Developer Context
 Developed with ⚡ by a local CS Engineer dedicated to building high-performance, personalized digital infrastructure that helps local market leaders dominate online. 
 
-*Crafted on a tight timeline to elevate local businesses before heading out to Bangalore this July.*
+*Crafted on a tight timeline to elevate local businesses.*
